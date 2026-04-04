@@ -1,11 +1,11 @@
 class_name GridRenderer extends Node2D
 
-var block_renderer: PackedScene = preload("res://scenes/block_renderer.tscn")
-var grid_cell_renderer: PackedScene = preload("res://scenes/grid_cell_renderer.tscn")
-var destroy_block_particles: PackedScene = preload("res://scenes/destroy_particles.tscn")
+var tile_renderer_scene: PackedScene = preload("res://scenes/block_renderer.tscn")
+var grid_cell_renderer_scene: PackedScene = preload("res://scenes/grid_cell_renderer.tscn")
+var destroy_tile_renderer_particles: PackedScene = preload("res://scenes/destroy_particles.tscn")
 
-var rendered_blocks: Array[Sprite2D]
-var dropping_blocks: Array[Sprite2D]
+var rendered_tile_renderers: Array[Sprite2D]
+var dropping_tile_renderers: Array[Sprite2D]
 
 var game_state: GameState:
 	get: return GameStateHolder.game_state
@@ -15,27 +15,27 @@ func _ready() -> void:
 
 func initialize() -> void:
 	position = Vector2((get_window().size.x / 2.0) - (GameConstants.WIDTH * GameConstants.TILE_SIZE / 2.0), GameConstants.TILE_SIZE / 2.0)
-	rendered_blocks.resize(GameConstants.TILE_COUNT)
+	rendered_tile_renderers.resize(GameConstants.TILE_COUNT)
 	draw_grid()
 	
 func clear_grid() -> void:
 	for child: Node in get_children():
 		child.queue_free()
 	
-	for block: Sprite2D in rendered_blocks:
-		if block:
-			block.queue_free()
+	for tile_renderer: Sprite2D in rendered_tile_renderers:
+		if tile_renderer:
+			tile_renderer.queue_free()
 	
-	for block: Sprite2D in dropping_blocks:
-		if block:
-			block.queue_free()
-	dropping_blocks = []
+	for tile_renderer: Sprite2D in dropping_tile_renderers:
+		if tile_renderer:
+			tile_renderer.queue_free()
+	dropping_tile_renderers = []
 
 func draw_grid() -> void:
 	clear_grid()
 	for x: int in range(0, GameConstants.WIDTH):
 		for y: int in range(0, GameConstants.HEIGHT):
-			var cell: Node2D = grid_cell_renderer.instantiate()
+			var cell: Node2D = grid_cell_renderer_scene.instantiate()
 			add_child(cell)
 			cell.position = Grid.address_to_position(Vector2i(x, y))
 			
@@ -43,7 +43,7 @@ func draw_grid() -> void:
 func generate_clear_particles(row: int, values: Array[int]) -> void:
 	for i: int in range(GameConstants.WIDTH):
 		# render particles
-		var particles: GPUParticles2D = destroy_block_particles.instantiate()
+		var particles: GPUParticles2D = destroy_tile_renderer_particles.instantiate()
 		add_child(particles)
 		particles.emitting = true
 		particles.position = Grid.index_to_position(row * GameConstants.WIDTH + i)
@@ -58,40 +58,40 @@ func update() -> void:
 		var percentage_of_next_row_dropped: float = (game_state.active_time - game_state.last_drop_time) / game_state.get_total_gravity() 
 		var grounded: bool = game_state.is_current_shape_touching_ground()
 		
-		# create new dropping blocks
-		if dropping_blocks.size() != game_state.current_active_shape.tiles.size():
-			for dropping_block: Sprite2D in dropping_blocks:
-				dropping_block.queue_free()
-			dropping_blocks = []
+		# create new dropping tile_renderers
+		if dropping_tile_renderers.size() != game_state.current_active_shape.tiles.size():
+			for dropping_tile_renderer: Sprite2D in dropping_tile_renderers:
+				dropping_tile_renderer.queue_free()
+			dropping_tile_renderers = []
 			for tile: Vector2i in game_state.current_active_shape.tiles:
-				var block: Sprite2D = block_renderer.instantiate()
-				add_child(block)
-				dropping_blocks.append(block)
+				var tile_renderer: Sprite2D = tile_renderer_scene.instantiate()
+				add_child(tile_renderer)
+				dropping_tile_renderers.append(tile_renderer)
 		
-		# update dropping blocks
+		# update dropping tile_renderers
 		for tile_index: int in range(0, game_state.current_active_shape.tiles.size()):
-			var dropping_block: Sprite2D = dropping_blocks[tile_index]
+			var dropping_tile_renderer: Sprite2D = dropping_tile_renderers[tile_index]
 			var color: Color = Grid.tile_to_color(game_state.current_active_shape.resource.color)
 			
-			if dropping_block:
-				dropping_block.position = Grid.address_to_position(game_state.current_active_shape.tiles[tile_index])\
+			if dropping_tile_renderer:
+				dropping_tile_renderer.position = Grid.address_to_position(game_state.current_active_shape.tiles[tile_index])\
 					+ Vector2(0.0, 0.0 if grounded else percentage_of_next_row_dropped * GameConstants.TILE_SIZE)
-				dropping_block.modulate = color
+				dropping_tile_renderer.modulate = color
 
 	# TODO: optimize this by only covering changed indices, maybe?
 	for i: int in range(GameConstants.TILE_COUNT):
-		var rendered_block: Sprite2D = rendered_blocks[i]
+		var rendered_tile_renderer: Sprite2D = rendered_tile_renderers[i]
 		var value: int = game_state.grid[i]
-		if !rendered_block and value > 0:
-			# create block
-			var block: Sprite2D = block_renderer.instantiate()
-			add_child(block)
-			rendered_blocks[i] = block
-			block.position = Grid.index_to_position(i)
-			block.modulate = Grid.tile_to_color(value)
-		elif rendered_block and value ==  0:
-			# destroy block
-			rendered_block.queue_free()
-		elif rendered_block and rendered_block.modulate != Grid.tile_to_color(value):
-			# recolor block
-			rendered_block.modulate = Grid.tile_to_color(value)
+		if !rendered_tile_renderer and value > 0:
+			# create tile_renderer
+			var tile_renderer: Sprite2D = tile_renderer_scene.instantiate()
+			add_child(tile_renderer)
+			rendered_tile_renderers[i] = tile_renderer
+			tile_renderer.position = Grid.index_to_position(i)
+			tile_renderer.modulate = Grid.tile_to_color(value)
+		elif rendered_tile_renderer and value ==  0:
+			# destroy tile_renderer
+			rendered_tile_renderer.queue_free()
+		elif rendered_tile_renderer and rendered_tile_renderer.modulate != Grid.tile_to_color(value):
+			# recolor tile_renderer
+			rendered_tile_renderer.modulate = Grid.tile_to_color(value)

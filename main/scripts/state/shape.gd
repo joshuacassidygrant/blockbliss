@@ -19,7 +19,7 @@ func rotate() -> void:
 	
 func get_tiles_with_rot_and_offset(rot: int, off: Vector2i) -> Array[Vector2i]:
 	rot = rot % 4
-	return Array(resource.tiles.map(func(t: Vector2i) -> Vector2i: return rotate_tile(t, rot) + off), TYPE_VECTOR2I, "", null)
+	return Array(resource.offsets.map(func(t: Vector2i) -> Vector2i: return rotate_tile(t, rot) + off), TYPE_VECTOR2I, "", null)
 
 func rotate_tile(tile: Vector2i, rot: int) -> Vector2i:
 	var rads: float = RADS_BY_ROT[rot]

@@ -42,7 +42,7 @@ func render_next_piece() -> void:
 					cell.texture = empty_cell_sprite
 
 func shape_has_tile_at_position(piece: Shape, x: int, y: int) -> bool:
-	return piece.resource.tiles.any(func(t: Vector2i) -> bool: return t.x == x and t.y == y)
+	return piece.resource.offsets.any(func(t: Vector2i) -> bool: return t.x == x and t.y == y)
 
 func clear() -> void:
 	for child: Node in piece_frame.get_children():
