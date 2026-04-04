@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var renderer: GridRenderer
 
 var game_state: GameState:
 	get: return GameStateHolder.game_state
@@ -8,18 +9,18 @@ var game_state: GameState:
 var has_emitted_loss: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	connect_listeners()
 
 
-func connect_listeners():
+func connect_listeners() -> void:
 	Events.request_quit.connect(handle_request_quit)
 	Events.request_start_game.connect(handle_request_start_game)
 
-func handle_request_quit():
+func handle_request_quit() -> void:
 	get_tree().quit()
 
-func handle_request_start_game():
+func handle_request_start_game() -> void:
 	Events.request_hide_menu.emit()
 	Music.play_game_track()
 	has_emitted_loss = false
@@ -27,8 +28,8 @@ func handle_request_start_game():
 	game_state.initialize()
 	game_state.start()
 
-	$renderer.initialize()
-	$renderer.update()
+	renderer.initialize()
+	renderer.update()
 
 func _process(delta: float) -> void:
 	if game_state:
@@ -51,7 +52,7 @@ func _process(delta: float) -> void:
 				game_state.rotate_active_blocks()
 
 			game_state.update(delta)
-			$renderer.update()
+			renderer.update()
 		elif game_state.status == GameState.GAME_STATUS.LOST and has_emitted_loss == false:
 			Events.on_game_lost.emit()
 			Music.play_loss_track()

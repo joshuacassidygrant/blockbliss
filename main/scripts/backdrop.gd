@@ -6,11 +6,11 @@ extends Sprite2D
 
 var current_tween: Tween
 
-func _ready():
+func _ready() -> void:
 	tween_random()
 
 
-func tween_random():
+func tween_random() -> void:
 	current_tween = get_tree().create_tween()
 	current_tween.tween_property(self, "modulate", colors.pick_random(),\
 		randf_range(transition_time - transition_time_fudge, transition_time + transition_time_fudge))

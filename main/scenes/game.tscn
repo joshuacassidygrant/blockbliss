@@ -17,8 +17,9 @@ scale_max = 10.42
 turbulence_enabled = true
 turbulence_noise_strength = 2.25
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" node_paths=PackedStringArray("renderer")]
 script = ExtResource("1_uwrxv")
+renderer = NodePath("renderer")
 
 [node name="backdrop" type="Sprite2D" parent="."]
 modulate = Color(0.0745098, 0.054902, 0.0980392, 1)

@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 Overlay="*res://scenes/overlay.tscn"
 Events="*res://scripts/services/events.gd"
 ShapeLibrary="*res://scenes/shape_library.tscn"
-Player="*res://scripts/services/player.gd"
 HighScores="*res://scripts/services/high_scores.gd"
 Camera="*res://scenes/camera.tscn"
 GameStateHolder="*res://scripts/services/game_state_holder.gd"
@@ -31,6 +30,10 @@ Music="*res://scenes/music.tscn"
 
 gdscript/warnings/untyped_declaration=1
 gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
 
 [display]
 
