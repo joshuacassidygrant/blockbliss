@@ -1,5 +1,7 @@
 class_name GameController extends Node
 
+signal on_game_loss
+
 var _score_controller: ScoreController
 var _grid_controller: GridController
 var _game_state_holder: GameStateHolder
@@ -9,8 +11,6 @@ var _music: MusicPlayer
 
 var state: GameState:
 	get: return _game_state_holder.game_state
-
-var has_emitted_loss: bool = false
 
 
 func bind_services(score_controller: ScoreController,\
@@ -69,7 +69,6 @@ func _process(delta: float) -> void:
 				state.last_drop_time = state.active_time
 				if state.current_active_shape:
 					if _grid_controller.is_current_shape_touching_ground():
-						@warning_ignore("unsafe_method_access")
 						_sfx.request_sound(SFXPlayer.Key.IMPACT)
 						_grid_controller.convert_active_tiles_to_grid()
 						_grid_controller.check_and_clear_rows()
@@ -94,7 +93,6 @@ func _process(delta: float) -> void:
 
 			# TODO: Maybe clean up this dependency later?
 			_renderer.update()
-		elif state.status == GameState.GAME_STATUS.LOST and has_emitted_loss == false:
-			Events.on_game_lost.emit()
-			_music.play_loss_track()
-			has_emitted_loss = true
+		elif state.status == GameState.GAME_STATUS.LOST:
+			on_game_loss.emit()
+		

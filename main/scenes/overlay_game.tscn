@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://7p2ehmwmivvg"]
+[gd_scene load_steps=7 format=3 uid="uid://7p2ehmwmivvg"]
 
+[ext_resource type="Script" uid="uid://yw6vh652n2y4" path="res://scripts/ui/game_overlay.gd" id="1_ie4jc"]
 [ext_resource type="Script" uid="uid://dg7lbr1wkxxsn" path="res://scripts/ui/score_box.gd" id="2_r2eog"]
 [ext_resource type="Theme" uid="uid://cl1waixbnwnmx" path="res://theme.tres" id="2_sfd0e"]
 [ext_resource type="Script" uid="uid://bgink1id4gwi4" path="res://scripts/ui/next_piece_renderer.gd" id="6_nx175"]
 [ext_resource type="Texture2D" uid="uid://cymtjfhxish04" path="res://art/blank.png" id="7_lhcu8"]
 [ext_resource type="Texture2D" uid="uid://bspu17ato11n3" path="res://art/block.png" id="8_cpe4y"]
 
-[node name="overlay" type="Control"]
+[node name="overlay" type="Control" node_paths=PackedStringArray("score_box", "next_piece_renderer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +17,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_ie4jc")
+score_box = NodePath("right_bar/score_box")
+next_piece_renderer = NodePath("right_bar/next_piece")
 
 [node name="right_bar" type="VBoxContainer" parent="."]
 layout_mode = 1

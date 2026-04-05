@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://scripts/services/events.gd"
-GameStateHolder="*res://scripts/services/game_state_holder.gd"
 
 [debug]
 

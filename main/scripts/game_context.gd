@@ -1,15 +1,23 @@
 class_name GameContext extends Node
 
+signal on_game_loss
+
+# LOCAL STRUCTURE
+@export var renderer: GridRenderer
+@export var preview_renderer: PreviewRenderer
+@export var overlay: GameOverlay
+
+# PACKED SCENES
+@export var shape_library_packed: PackedScene
+
+
 var _game_controller: GameController
 var _grid_controller: GridController
 var _score_controller: ScoreController
 var _sfx: SFXPlayer
 var _music: MusicPlayer
 var _shape_lib: ShapeLibrary
-
-@export var renderer: GridRenderer
-@export var preview_renderer: PreviewRenderer
-@export var shape_library_packed: PackedScene
+var _game_state_holder: GameStateHolder
 
 func build_services() -> void:
 	_game_controller = GameController.new()
@@ -21,22 +29,30 @@ func build_services() -> void:
 	_shape_lib = shape_library_packed.instantiate() as ShapeLibrary
 	add_child(_shape_lib)
 
-func bind_services(sfx: SFXPlayer, music: MusicPlayer) -> void:
+func bind_services(sfx: SFXPlayer, music: MusicPlayer, gsh: GameStateHolder) -> void:
 	_sfx = sfx
 	_music = music
-	_game_controller.bind_services(_score_controller, _grid_controller, GameStateHolder, renderer, _sfx, _music)
-	_grid_controller.bind_services(_score_controller, GameStateHolder, _shape_lib, _sfx)
-	_score_controller.bind_services(GameStateHolder)
+	_game_state_holder = gsh
+
+	_game_controller.bind_services(_score_controller, _grid_controller, gsh, renderer, _sfx, _music)
+	_grid_controller.bind_services(_score_controller, gsh, _shape_lib, _sfx)
+	_score_controller.bind_services(gsh)
 	
-	renderer.bind_services(_grid_controller)
-	preview_renderer.bind_services(_grid_controller)
+	_game_controller.on_game_loss.connect(on_game_loss.emit)
+	
+	renderer.bind_services(_grid_controller, _game_state_holder)
+	preview_renderer.bind_services(_grid_controller, _game_state_holder)
+	overlay.initialize(_game_state_holder)
+	
 
 func handle_start_new_game() -> void:
-	GameStateHolder.game_state = GameState.new()
+	_game_state_holder.game_state = GameState.new()
 	_game_controller.initialize()
 	_game_controller.start()
 
 	renderer.initialize()
 	renderer.update()
+	
+	_music.play_game_track()
 	
 	

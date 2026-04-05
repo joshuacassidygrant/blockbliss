@@ -8,14 +8,16 @@ var rendered_tile_renderers: Array[Sprite2D]
 var dropping_tile_renderers: Array[Sprite2D]
 
 var _grid_controller: GridController
+var _game_state_holder: GameStateHolder
 
 var game_state: GameState:
-	get: return GameStateHolder.game_state
+	get: return _game_state_holder.game_state
 
 func _ready() -> void:
 	Events.on_row_clear.connect(generate_clear_particles)
 
-func bind_services(grid_controller: GridController) -> void:
+func bind_services(grid_controller: GridController, gsh: GameStateHolder) -> void:
+	_game_state_holder = gsh
 	_grid_controller = grid_controller
 
 func initialize() -> void:

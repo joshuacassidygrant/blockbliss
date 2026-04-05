@@ -6,7 +6,7 @@ var _shape_library: ShapeLibrary
 var _sfx: SFXPlayer
 
 var state: GameState:
-	get: return GameStateHolder.game_state
+	get: return _game_state_holder.game_state
 	
 func bind_services(score_controller: ScoreController,\
 		game_state_holder: GameStateHolder,\
@@ -91,8 +91,6 @@ func convert_active_tiles_to_grid() -> void:
 
 func generate_new_active_tile_shape() -> void:
 	state.current_active_shape = state.next_active_shape
-	@warning_ignore("unsafe_method_access")
-	@warning_ignore("unsafe_cast")
 	var shape: ShapeResource = _shape_library.get_random_shape() as ShapeResource
 	if shape:
 		state.next_active_shape = Shape.new(Vector2i(5, 0), shape)

@@ -10,8 +10,9 @@ func play_menu_track() -> void:
 		
 	if not finished.is_connected(play_menu_track):
 		finished.connect(play_menu_track)
-		stream = menu_track
-		play()
+	
+	stream = menu_track
+	play()
 
 func play_loss_track() -> void:
 	if finished.is_connected(play_game_track):
@@ -19,13 +20,15 @@ func play_loss_track() -> void:
 		
 	if not finished.is_connected(play_menu_track):
 		finished.connect(play_menu_track)
-		stream = loss_track
-		play()
+
+	stream = loss_track
+	play()
 
 	
 func play_game_track() -> void:
 	if finished.is_connected(play_menu_track):
 		finished.disconnect(play_menu_track)
+	
 	finished.connect(play_game_track)
 	stream = game_tracks.pick_random()
 	play()

@@ -1,21 +1,27 @@
-extends PanelContainer
+class_name NextPieceRenderer extends PanelContainer
 
 @export var piece_frame: Control
 @export var empty_cell_sprite: Texture2D
 @export var tile_sprite: Texture2D
 
+var _game_state_holder: GameStateHolder
+
 var game_state: GameState:
 	get:
-		return GameStateHolder.game_state
+		return _game_state_holder.game_state
 
 const WIDTH: int = 5
 const HEIGHT: int = 5
 const OFFSET: int = 2
 const FRAME_OFFSET: Vector2 = Vector2(16, 0)
 
-func _ready() -> void:
+func initialize(gsh: GameStateHolder) -> void:
+	bind_services(gsh)
 	bind_listeners()
-	
+
+func bind_services(gsh: GameStateHolder) -> void:
+	_game_state_holder = gsh	
+
 func bind_listeners() -> void:
 	Events.on_new_next_shape.connect(render_next_piece)
 

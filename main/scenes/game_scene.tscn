@@ -6,10 +6,11 @@
 [ext_resource type="Script" uid="uid://d1vlp30sh7kh3" path="res://scripts/preview_renderer.gd" id="3_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://7p2ehmwmivvg" path="res://scenes/overlay_game.tscn" id="4_bw6k5"]
 
-[node name="GameScene" type="Node2D" node_paths=PackedStringArray("renderer", "preview_renderer")]
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("renderer", "preview_renderer", "overlay")]
 script = ExtResource("1_w5aja")
 renderer = NodePath("renderer")
 preview_renderer = NodePath("preview_renderer")
+overlay = NodePath("CanvasLayer/overlay")
 shape_library_packed = ExtResource("2_y3j0m")
 
 [node name="renderer" type="Node2D" parent="."]
@@ -18,4 +19,6 @@ script = ExtResource("2_ycayy")
 [node name="preview_renderer" type="Node2D" parent="."]
 script = ExtResource("3_bw6k5")
 
-[node name="overlay" parent="." instance=ExtResource("4_bw6k5")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="overlay" parent="CanvasLayer" instance=ExtResource("4_bw6k5")]

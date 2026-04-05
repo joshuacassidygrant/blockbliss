@@ -29,8 +29,6 @@ func bind_events() -> void:
 	Events.request_hide_menu.connect(hide_menu)
 	Events.request_dismiss_loss.connect(show_menu)
 	Events.request_dismiss_highscores.connect(show_menu)
-	
-	_music.play_menu_track()
 
 
 func on_press_start() -> void:
@@ -51,4 +49,3 @@ func hide_menu() -> void:
 	
 func show_menu() -> void:
 	visible = true
-	_music.play_menu_track()
