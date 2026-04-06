@@ -1,0 +1,162 @@
+[gd_scene load_steps=7 format=3 uid="uid://cosdywv15dqc2"]
+
+[ext_resource type="Script" uid="uid://pdrpv7him1ur" path="res://features/menu/menu_overlay.gd" id="1_ck0ms"]
+[ext_resource type="Script" uid="uid://bl6yjxqymv6bq" path="res://features/menu/main_menu.gd" id="1_nn6e8"]
+[ext_resource type="Theme" uid="uid://cl1waixbnwnmx" path="res://features/ui/theme.tres" id="2_s47xe"]
+[ext_resource type="Script" uid="uid://dbf35mgdtb6jc" path="res://features/menu/end_screen.gd" id="3_6gq44"]
+[ext_resource type="FontFile" uid="uid://8i27bnsam3lf" path="res://features/ui/fonts/basis33/basis33.ttf" id="4_a2m1e"]
+[ext_resource type="Script" uid="uid://de0kokxb1x42b" path="res://features/scores/high_scores_menu.gd" id="5_wdrv5"]
+
+[node name="overlay" type="Control" node_paths=PackedStringArray("main_menu", "high_scores_menu", "end_screen")]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ck0ms")
+main_menu = NodePath("main_menu")
+high_scores_menu = NodePath("high_scores_menu")
+end_screen = NodePath("end_screen")
+
+[node name="main_menu" type="PanelContainer" parent="." node_paths=PackedStringArray("start_button", "scores_button", "quit_button")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nn6e8")
+start_button = NodePath("layout_margin/layout_options/start")
+scores_button = NodePath("layout_margin/layout_options/scores")
+quit_button = NodePath("layout_margin/layout_options/quit")
+
+[node name="layout_margin" type="MarginContainer" parent="main_menu"]
+layout_mode = 2
+theme = ExtResource("2_s47xe")
+
+[node name="layout_options" type="VBoxContainer" parent="main_menu/layout_margin"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="main_menu/layout_margin/layout_options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Welcome to tetgd"
+
+[node name="subtitle" type="Label" parent="main_menu/layout_margin/layout_options"]
+layout_mode = 2
+text = "You can do anything you want in tegdfst"
+
+[node name="start" type="Button" parent="main_menu/layout_margin/layout_options"]
+layout_mode = 2
+text = "Start"
+
+[node name="scores" type="Button" parent="main_menu/layout_margin/layout_options"]
+layout_mode = 2
+text = "High Scores"
+
+[node name="quit" type="Button" parent="main_menu/layout_margin/layout_options"]
+layout_mode = 2
+text = "Quit"
+
+[node name="end_screen" type="PanelContainer" parent="." node_paths=PackedStringArray("dismiss_button", "score", "name_input")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_6gq44")
+dismiss_button = NodePath("layout_margin/layout_v/dismiss_button")
+score = NodePath("layout_margin/layout_v/HBoxContainer/label_score")
+name_input = NodePath("layout_margin/layout_v/name_input")
+
+[node name="layout_margin" type="MarginContainer" parent="end_screen"]
+layout_mode = 2
+theme = ExtResource("2_s47xe")
+
+[node name="layout_v" type="VBoxContainer" parent="end_screen/layout_margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_screen/layout_margin/layout_v"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_font_sizes/font_size = 32
+text = "Congratulations, you died!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="end_screen/layout_margin/layout_v"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="end_screen/layout_margin/layout_v/HBoxContainer"]
+layout_mode = 2
+text = "Your score:"
+
+[node name="label_score" type="Label" parent="end_screen/layout_margin/layout_v/HBoxContainer"]
+layout_mode = 2
+text = "120032"
+
+[node name="name_input" type="LineEdit" parent="end_screen/layout_margin/layout_v"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_a2m1e")
+placeholder_text = "Your name here..."
+
+[node name="dismiss_button" type="Button" parent="end_screen/layout_margin/layout_v"]
+layout_mode = 2
+theme = ExtResource("2_s47xe")
+text = "Save Score and Return To Menu"
+
+[node name="high_scores_menu" type="PanelContainer" parent="." node_paths=PackedStringArray("back_button", "scores_parent")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_wdrv5")
+back_button = NodePath("layout_margin/layout_v/dismiss")
+scores_parent = NodePath("layout_margin/layout_v/scores_parent")
+
+[node name="layout_margin" type="MarginContainer" parent="high_scores_menu"]
+layout_mode = 2
+theme = ExtResource("2_s47xe")
+
+[node name="layout_v" type="VBoxContainer" parent="high_scores_menu/layout_margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="high_scores_menu/layout_margin/layout_v"]
+layout_mode = 2
+text = "Scores:"
+
+[node name="scores_parent" type="VBoxContainer" parent="high_scores_menu/layout_margin/layout_v"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="high_scores_menu/layout_margin/layout_v/scores_parent"]
+layout_mode = 2
+text = "jim ..... 00000500"
+
+[node name="dismiss" type="Button" parent="high_scores_menu/layout_margin/layout_v"]
+layout_mode = 2
+text = "Back"

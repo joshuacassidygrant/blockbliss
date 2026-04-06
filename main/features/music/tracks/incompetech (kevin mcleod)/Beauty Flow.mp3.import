@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://tkeuxr42oxmr"
+path="res://.godot/imported/Beauty Flow.mp3-f45facea8fef1c354e0bab7485804cf0.mp3str"
+
+[deps]
+
+source_file="res://features/music/tracks/incompetech (kevin mcleod)/Beauty Flow.mp3"
+dest_files=["res://.godot/imported/Beauty Flow.mp3-f45facea8fef1c354e0bab7485804cf0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

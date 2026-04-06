@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://nspvl4gnpxhg"
+path="res://.godot/imported/Cyborg Ninja.mp3-b538d91a0226c80f404e3f59688dd0dc.mp3str"
+
+[deps]
+
+source_file="res://features/music/tracks/incompetech (kevin mcleod)/Cyborg Ninja.mp3"
+dest_files=["res://.godot/imported/Cyborg Ninja.mp3-b538d91a0226c80f404e3f59688dd0dc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

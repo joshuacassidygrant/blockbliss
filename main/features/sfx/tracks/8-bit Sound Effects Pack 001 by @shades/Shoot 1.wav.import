@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckl6sakj5w5hr"
+path="res://.godot/imported/Shoot 1.wav-65878d737075c49ead0b424ccdb14469.sample"
+
+[deps]
+
+source_file="res://features/sfx/tracks/8-bit Sound Effects Pack 001 by @shades/Shoot 1.wav"
+dest_files=["res://.godot/imported/Shoot 1.wav-65878d737075c49ead0b424ccdb14469.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

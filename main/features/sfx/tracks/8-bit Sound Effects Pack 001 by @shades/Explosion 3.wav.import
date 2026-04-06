@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://8u8osiwfg0xu"
+path="res://.godot/imported/Explosion 3.wav-612f5489771071630eeb806b23ae9ee0.sample"
+
+[deps]
+
+source_file="res://features/sfx/tracks/8-bit Sound Effects Pack 001 by @shades/Explosion 3.wav"
+dest_files=["res://.godot/imported/Explosion 3.wav-612f5489771071630eeb806b23ae9ee0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
