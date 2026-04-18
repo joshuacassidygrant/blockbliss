@@ -1,6 +1,7 @@
 class_name GameController extends Node
 
 signal on_game_loss
+signal on_active_time_updated
 
 var _score_controller: ScoreController
 var _grid_controller: GridController
@@ -69,6 +70,13 @@ func _process(delta: float) -> void:
 						_shapes_controller.next_active_tile_shape()
 					else:
 						state.current_active_shape.offset += Vector2i(0, 1)
+						
+			var time_to_next_challenge: float = state.last_challenge_piece_added_time + GameConstants.CHALLENGE_PIECE_BASE_INTERVAL_SECONDS - state.active_time
+			if time_to_next_challenge <= 0:
+				state.last_challenge_piece_added_time = state.active_time
+						
+			on_active_time_updated.emit(state.active_time, 1.0 - (time_to_next_challenge / GameConstants.CHALLENGE_PIECE_BASE_INTERVAL_SECONDS))
+			
 			
 			# todo: allow holding down
 			if Input.is_action_pressed("right"):

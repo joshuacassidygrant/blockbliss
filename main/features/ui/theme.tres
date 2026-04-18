@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=4 uid="uid://cl1waixbnwnmx"]
+[gd_resource type="Theme" load_steps=20 format=4 uid="uid://cl1waixbnwnmx"]
 
 [ext_resource type="FontFile" uid="uid://8i27bnsam3lf" path="res://features/ui/fonts/basis33/basis33.ttf" id="1_e1x85"]
 
@@ -70,6 +70,21 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7cbrd"]
+bg_color = Color(0.27752772, 0.27752775, 0.27752757, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h4b0"]
+bg_color = Color(0.47058824, 0.40392157, 1, 1)
+corner_detail = 2
 
 [sub_resource type="Image" id="Image_e1x85"]
 data = {
@@ -1506,6 +1521,8 @@ MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 16
+ProgressBar/styles/background = SubResource("StyleBoxFlat_7cbrd")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_6h4b0")
 TextEdit/colors/background_color = Color(0, 0, 0, 0)
 TextEdit/colors/caret_background_color = Color(0, 0, 0, 1)
 TextEdit/colors/caret_color = Color(0.875, 0.875, 0.875, 1)

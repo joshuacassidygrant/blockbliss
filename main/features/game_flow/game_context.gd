@@ -64,7 +64,7 @@ func bind_services(sfx: SFXPlayer, music: MusicPlayer, gsh: GameStateHolder) -> 
 	
 	renderer.bind_services(_grid_controller, _game_state_holder)
 	preview_renderer.bind_services(_grid_controller, _game_state_holder)
-	overlay.initialize(_score_controller, _shapes_controller)
+	overlay.initialize(_score_controller, _shapes_controller, _game_controller)
 		
 
 func handle_start_new_game() -> void:

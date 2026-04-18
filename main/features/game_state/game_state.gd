@@ -7,6 +7,7 @@ var last_status: GAME_STATUS = GAME_STATUS.NOT_STARTED
 var active_time: float
 var last_drop_time: float
 var last_slide_time: float
+var last_challenge_piece_added_time: float
 var current_active_shape: Shape
 var gravity: float = 0.5 # seconds per tile drop
 var speed_up: bool = false
@@ -14,6 +15,8 @@ var score: int
 
 var shape_stack: Array[Shape]
 var shape_discard: Array[Shape]
+
+
 
 
 # grid is an array of tiles with 0 representing empty higher values representing colored blocks 

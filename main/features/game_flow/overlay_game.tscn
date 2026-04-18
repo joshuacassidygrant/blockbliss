@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://7p2ehmwmivvg"]
+[gd_scene load_steps=8 format=3 uid="uid://7p2ehmwmivvg"]
 
 [ext_resource type="Script" uid="uid://yw6vh652n2y4" path="res://features/game_flow/game_overlay.gd" id="1_ie4jc"]
 [ext_resource type="Script" uid="uid://dg7lbr1wkxxsn" path="res://features/scores/score_box.gd" id="2_r2eog"]
 [ext_resource type="Theme" uid="uid://cl1waixbnwnmx" path="res://features/ui/theme.tres" id="2_sfd0e"]
+[ext_resource type="Script" uid="uid://cho85xnntt3mu" path="res://features/game_flow/ui_timer.gd" id="4_lqw6l"]
 [ext_resource type="Script" uid="uid://bgink1id4gwi4" path="res://features/shapes/next_piece_renderer.gd" id="6_nx175"]
 [ext_resource type="Texture2D" uid="uid://cymtjfhxish04" path="res://features/grid/art/blank.png" id="7_lhcu8"]
 [ext_resource type="Texture2D" uid="uid://bspu17ato11n3" path="res://features/grid/art/block.png" id="8_cpe4y"]
 
-[node name="overlay" type="Control" node_paths=PackedStringArray("score_box", "next_piece_renderer")]
+[node name="overlay" type="Control" node_paths=PackedStringArray("score_box", "next_piece_renderer", "ui_timer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -17,9 +18,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_sfd0e")
 script = ExtResource("1_ie4jc")
 score_box = NodePath("right_bar/score_box")
 next_piece_renderer = NodePath("right_bar/next_piece")
+ui_timer = NodePath("right_bar/timer")
 
 [node name="right_bar" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -51,12 +54,45 @@ text = "SCORE:"
 layout_mode = 2
 text = "00000000"
 
-[node name="next_piece" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("piece_frame")]
+[node name="timer" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("bar", "time_label")]
+layout_mode = 2
+script = ExtResource("4_lqw6l")
+bar = NodePath("MarginContainer/VBoxContainer/ProgressBar")
+time_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
+
+[node name="MarginContainer" type="MarginContainer" parent="right_bar/timer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="right_bar/timer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="right_bar/timer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="right_bar/timer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfd0e")
+text = "TIME:"
+
+[node name="Label2" type="Label" parent="right_bar/timer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfd0e")
+text = "12:00"
+
+[node name="ProgressBar" type="ProgressBar" parent="right_bar/timer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="next_piece" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("piece_frames", "deck_count_label", "discard_count_label")]
 layout_mode = 2
 script = ExtResource("6_nx175")
-piece_frame = NodePath("layout_margin/layout_v/sprite_frame")
+piece_frames = [NodePath("layout_margin/layout_v/sprite_frame3"), NodePath("layout_margin/layout_v/sprite_frame2"), NodePath("layout_margin/layout_v/sprite_frame")]
 empty_cell_sprite = ExtResource("7_lhcu8")
 tile_sprite = ExtResource("8_cpe4y")
+deck_count_label = NodePath("layout_margin/layout_v/HBoxContainer/Label")
+discard_count_label = NodePath("layout_margin/layout_v/HBoxContainer2/Label2")
 
 [node name="layout_margin" type="MarginContainer" parent="right_bar/next_piece"]
 layout_mode = 2
@@ -65,10 +101,36 @@ theme = ExtResource("2_sfd0e")
 [node name="layout_v" type="VBoxContainer" parent="right_bar/next_piece/layout_margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="right_bar/next_piece/layout_margin/layout_v"]
+[node name="HBoxContainer" type="HBoxContainer" parent="right_bar/next_piece/layout_margin/layout_v"]
 layout_mode = 2
-text = "NEXT PIECE"
+
+[node name="Label2" type="Label" parent="right_bar/next_piece/layout_margin/layout_v/HBoxContainer"]
+layout_mode = 2
+text = "DECK: "
+
+[node name="Label" type="Label" parent="right_bar/next_piece/layout_margin/layout_v/HBoxContainer"]
+layout_mode = 2
+text = "4"
 
 [node name="sprite_frame" type="PanelContainer" parent="right_bar/next_piece/layout_margin/layout_v"]
 custom_minimum_size = Vector2(128, 156)
 layout_mode = 2
+
+[node name="sprite_frame2" type="PanelContainer" parent="right_bar/next_piece/layout_margin/layout_v"]
+custom_minimum_size = Vector2(128, 156)
+layout_mode = 2
+
+[node name="sprite_frame3" type="PanelContainer" parent="right_bar/next_piece/layout_margin/layout_v"]
+custom_minimum_size = Vector2(128, 156)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="right_bar/next_piece/layout_margin/layout_v"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="right_bar/next_piece/layout_margin/layout_v/HBoxContainer2"]
+layout_mode = 2
+text = "DISCARD: "
+
+[node name="Label2" type="Label" parent="right_bar/next_piece/layout_margin/layout_v/HBoxContainer2"]
+layout_mode = 2
+text = "1"

@@ -23,11 +23,12 @@ func next_active_tile_shape() -> void:
 	
 	maybe_shuffle_back_discard()
 	
-	var next_active_shape: Shape = state.shape_stack[0]
-	on_new_next_shape.emit(next_active_shape)
+	on_new_next_shape.emit(state.shape_stack.slice(0, GameConstants.STACK_PREVIEW_WINDOW), 
+			state.shape_stack.size(),
+			state.shape_discard.size())
 
 func maybe_shuffle_back_discard() -> void:
-	if state.shape_stack.size() <= 0:
+	if state.shape_stack.size() <= GameConstants.STACK_PREVIEW_WINDOW:
 		state.shape_stack.append_array(state.shape_discard)
 		state.shape_stack.shuffle()
 		on_shape_deck_reshuffle.emit()
