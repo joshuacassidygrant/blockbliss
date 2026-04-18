@@ -5,6 +5,7 @@ signal on_game_loss
 var _score_controller: ScoreController
 var _grid_controller: GridController
 var _game_state_holder: GameStateHolder
+var _shapes_controller: ShapesController
 var _renderer: GridRenderer
 var _sfx: SFXPlayer
 var _music: MusicPlayer
@@ -13,25 +14,26 @@ var state: GameState:
 	get: return _game_state_holder.game_state
 
 
-func bind_services(score_controller: ScoreController,\
-		grid_controller: GridController,\
-		game_state_holder: GameStateHolder,\
+func bind_services(score_controller: ScoreController,
+		grid_controller: GridController,
+		game_state_holder: GameStateHolder,
 		renderer: GridRenderer,
 		sfx: SFXPlayer,
-		music: MusicPlayer) -> void:
+		music: MusicPlayer,
+		shapes_controller: ShapesController) -> void:
 	_score_controller = score_controller
 	_grid_controller = grid_controller
 	_game_state_holder = game_state_holder
 	_renderer = renderer
 	_sfx = sfx
 	_music = music
+	_shapes_controller = shapes_controller
 	
 
 func start() -> void:
 	_score_controller.reset_score()
 	state.status = GameState.GAME_STATUS.ACTIVE
-	_grid_controller.generate_new_active_tile_shape()
-	_grid_controller.generate_new_active_tile_shape() # Generates a second so we have one in the queue
+	_shapes_controller.next_active_tile_shape()
 
 func toggle_pause() -> void:
 	if state.status == GameState.GAME_STATUS.PAUSED:
@@ -43,6 +45,7 @@ func toggle_pause() -> void:
 
 func update_game_state() -> void:
 	# check if any grid tiles are in the top row and lose if so
+	# TODO: this can trigger when pieces load in if they aren't rotated correctly or are too big
 	for i: int in range(GameConstants.WIDTH):
 		if state.grid[i] != 0:
 			state.status = GameState.GAME_STATUS.LOST
@@ -63,7 +66,7 @@ func _process(delta: float) -> void:
 						_grid_controller.convert_active_tiles_to_grid()
 						_grid_controller.check_and_clear_rows()
 						update_game_state()
-						_grid_controller.generate_new_active_tile_shape()
+						_shapes_controller.next_active_tile_shape()
 					else:
 						state.current_active_shape.offset += Vector2i(0, 1)
 			

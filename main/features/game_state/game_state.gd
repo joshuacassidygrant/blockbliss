@@ -8,10 +8,14 @@ var active_time: float
 var last_drop_time: float
 var last_slide_time: float
 var current_active_shape: Shape
-var next_active_shape: Shape
 var gravity: float = 0.5 # seconds per tile drop
 var speed_up: bool = false
 var score: int
+
+var shape_stack: Array[Shape]
+var shape_discard: Array[Shape]
+
+
 # grid is an array of tiles with 0 representing empty higher values representing colored blocks 
 var grid: Array[int]
 
@@ -28,6 +32,5 @@ func initialize() -> void:
 	active_time = 0
 	last_drop_time = 0
 	current_active_shape = null
-	next_active_shape = null
 	grid.resize(GameConstants.TILE_COUNT)
 	grid.fill(GameConstants.TILE.NONE)

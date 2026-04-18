@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StartShapes" load_steps=10 format=3 uid="uid://dg8lypwqc2opu"]
+
+[ext_resource type="Script" uid="uid://lj020y82osui" path="res://features/shapes/start_shapes.gd" id="1_qy3k6"]
+[ext_resource type="Script" uid="uid://ciat0m1hxwvsa" path="res://features/shapes/shape_resource.gd" id="2_1ojt1"]
+[ext_resource type="Resource" uid="uid://xumrblpioele" path="res://features/shapes/content/shapes/left_l.tres" id="3_yidoa"]
+[ext_resource type="Resource" uid="uid://dmckkxc2f2r37" path="res://features/shapes/content/shapes/left_zig.tres" id="4_r70dr"]
+[ext_resource type="Resource" uid="uid://diqr1iwl1qyeb" path="res://features/shapes/content/shapes/long.tres" id="5_oqvnl"]
+[ext_resource type="Resource" uid="uid://dfgrqocrd4cee" path="res://features/shapes/content/shapes/right_l.tres" id="6_1xfx1"]
+[ext_resource type="Resource" uid="uid://dx43b3mxnleus" path="res://features/shapes/content/shapes/right_zig.tres" id="7_fajub"]
+[ext_resource type="Resource" uid="uid://73n23id3ws2n" path="res://features/shapes/content/shapes/square.tres" id="8_xnjjc"]
+[ext_resource type="Resource" uid="uid://x7cata8fpfpy" path="res://features/shapes/content/shapes/triangle.tres" id="9_3phfn"]
+
+[resource]
+script = ExtResource("1_qy3k6")
+shapes = Array[ExtResource("2_1ojt1")]([ExtResource("3_yidoa"), ExtResource("4_r70dr"), ExtResource("5_oqvnl"), ExtResource("6_1xfx1"), ExtResource("7_fajub"), ExtResource("8_xnjjc"), ExtResource("9_3phfn"), ExtResource("3_yidoa"), ExtResource("6_1xfx1"), ExtResource("8_xnjjc"), ExtResource("9_3phfn")])
+metadata/_custom_type_script = "uid://lj020y82osui"

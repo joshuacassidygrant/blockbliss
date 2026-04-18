@@ -1,6 +1,5 @@
 class_name GridController extends Node
 
-signal on_new_next_shape
 signal on_row_clear
 signal request_add_score
 
@@ -88,12 +87,7 @@ func convert_active_tiles_to_grid() -> void:
 		state.grid[tile_index] = state.current_active_shape.resource.color
 	state.current_active_shape = null
 
-func generate_new_active_tile_shape() -> void:
-	state.current_active_shape = state.next_active_shape
-	var shape: ShapeResource = _shape_library.get_random_shape() as ShapeResource
-	if shape:
-		state.next_active_shape = Shape.new(Vector2i(5, 0), shape)
-		on_new_next_shape.emit(state.next_active_shape)
+
 
 func can_clear_row(row: int) -> bool:
 	var start_index: int = row * GameConstants.WIDTH
