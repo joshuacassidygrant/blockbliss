@@ -19,6 +19,7 @@ var _game_controller: GameController
 var _grid_controller: GridController
 var _score_controller: ScoreController
 var _shapes_controller: ShapesController
+var _mission_controller: MissionController
 var _sfx: SFXPlayer
 var _music: MusicPlayer
 var _shape_lib: ShapeLibrary
@@ -34,6 +35,8 @@ func build_services() -> void:
 	add_child(_score_controller)
 	_shapes_controller = ShapesController.new()
 	add_child(_shapes_controller)
+	_mission_controller = MissionController.new()
+	add_child(_mission_controller)
 	_shape_lib = shape_library_packed.instantiate() as ShapeLibrary
 	add_child(_shape_lib)
 	
@@ -55,7 +58,8 @@ func bind_services(sfx: SFXPlayer, music: MusicPlayer, gsh: GameStateHolder) -> 
 		_shapes_controller)
 	_grid_controller.bind_services(gsh, _shape_lib, _sfx)
 	_score_controller.bind_services(gsh)
-	_shapes_controller.bind_services(_game_state_holder, _shape_lib)
+	_shapes_controller.bind_services(_game_state_holder, _shape_lib, _mission_controller)
+	_mission_controller.bind_services(_shape_lib)
 	_camera.initialize()
 	
 	_grid_controller.on_row_clear.connect(_camera.request_shake_screen.emit)
@@ -72,6 +76,7 @@ func setup() -> void:
 
 func handle_start_new_game() -> void:
 	_game_state_holder.game_state = GameState.new()
+	_game_state_holder.game_state.mission = _mission_controller.generate_mission()
 	initialize_game_state()
 	_game_controller.start()
 

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShapeResource" load_steps=2 format=3 uid="uid://8f5k10xohdt5"]
+[gd_resource type="Resource" script_class="ShapeResource" load_steps=3 format=3 uid="uid://8f5k10xohdt5"]
 
+[ext_resource type="Texture2D" uid="uid://hknnprssv6aa" path="res://features/shapes/art/eyes.png" id="1_cqloc"]
 [ext_resource type="Script" uid="uid://ciat0m1hxwvsa" path="res://features/shapes/shape_resource.gd" id="1_fx55k"]
 
 [resource]
@@ -7,4 +8,5 @@ script = ExtResource("1_fx55k")
 offsets = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 1), Vector2i(5, 2)])
 color = 3
 usages = 1
+googly_eyes = ExtResource("1_cqloc")
 metadata/_custom_type_script = "uid://ciat0m1hxwvsa"

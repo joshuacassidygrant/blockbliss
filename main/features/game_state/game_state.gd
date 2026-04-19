@@ -4,6 +4,9 @@ enum GAME_STATUS { NOT_STARTED, ACTIVE, PAUSED, LOST }
 
 var status: GAME_STATUS = GAME_STATUS.NOT_STARTED
 var last_status: GAME_STATUS = GAME_STATUS.NOT_STARTED
+
+var mission: MissionState
+
 var active_time: float
 var last_drop_time: float
 var last_slide_time: float

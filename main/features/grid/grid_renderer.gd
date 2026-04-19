@@ -74,6 +74,7 @@ func update() -> void:
 				add_child(tile_renderer)
 				dropping_tile_renderers.append(tile_renderer)
 		
+		
 		# update dropping tile_renderers
 		for tile_index: int in range(0, game_state.current_active_shape.tiles.size()):
 			var dropping_tile_renderer: Sprite2D = dropping_tile_renderers[tile_index]

@@ -6,13 +6,17 @@ signal on_shape_deck_reshuffle
 
 var _game_state_holder: GameStateHolder
 var _shape_library: ShapeLibrary
+var _mission_controller: MissionController
 
 var state: GameState:
 	get: return _game_state_holder.get_state()
 
-func bind_services(gsh: GameStateHolder, shape_library: ShapeLibrary) -> void:
+func bind_services(gsh: GameStateHolder,
+		shape_library: ShapeLibrary,
+		mission_controller: MissionController) -> void:
 	_game_state_holder = gsh
 	_shape_library = shape_library
+	_mission_controller = mission_controller
 
 func next_active_tile_shape() -> void:
 	maybe_shuffle_back_discard()
@@ -41,7 +45,7 @@ func maybe_shuffle_back_discard() -> void:
 		on_shape_deck_reshuffle.emit()
 		
 func generate_challenge_shape() -> void:
-	# TODO: this is just hardcoding 7 for testing, will want ot draw it from level settings
-	var shape_res: ShapeResource = _shape_library.get_shape_by_index(7)
+	# BUG: It doesn't seem to ever be getting the last shape?
+	var shape_res: ShapeResource = _mission_controller.pop_next_challenge_shape(_game_state_holder.game_state.mission)
 	var shape: Shape = Shape.new( Vector2i(5, 0), shape_res)
 	state.shape_discard.append(shape)
