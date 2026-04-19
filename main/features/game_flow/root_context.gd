@@ -57,6 +57,7 @@ func handle_request_start_game() -> void:
 	if game_scene:
 		game_scene.build_services()
 		game_scene.bind_services(_sfx, _music, _game_state_holder)
+		game_scene.setup()
 		game_scene.handle_start_new_game()
 		
 		game_scene.on_game_loss.connect(handle_loss)

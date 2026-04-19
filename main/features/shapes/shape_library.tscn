@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1e8upbix8tdr"]
+[gd_scene load_steps=11 format=3 uid="uid://1e8upbix8tdr"]
 
 [ext_resource type="Script" uid="uid://k2g8har1n8t" path="res://features/shapes/shape_library.gd" id="1_vqj0q"]
 [ext_resource type="Script" uid="uid://ciat0m1hxwvsa" path="res://features/shapes/shape_resource.gd" id="2_g7ukk"]
@@ -9,7 +9,8 @@
 [ext_resource type="Resource" uid="uid://dfgrqocrd4cee" path="res://features/shapes/content/shapes/right_l.tres" id="6_kixj3"]
 [ext_resource type="Resource" uid="uid://dx43b3mxnleus" path="res://features/shapes/content/shapes/right_zig.tres" id="7_7l224"]
 [ext_resource type="Resource" uid="uid://x7cata8fpfpy" path="res://features/shapes/content/shapes/triangle.tres" id="9_ofnkh"]
+[ext_resource type="Resource" uid="uid://8f5k10xohdt5" path="res://features/shapes/content/shapes/globlin.tres" id="10_gginx"]
 
 [node name="shape_library" type="Node"]
 script = ExtResource("1_vqj0q")
-shapes = Array[ExtResource("2_g7ukk")]([ExtResource("3_x56pv"), ExtResource("4_b6nfl"), ExtResource("3_ingjt"), ExtResource("6_kixj3"), ExtResource("7_7l224"), ExtResource("4_x07xo"), ExtResource("9_ofnkh")])
+shapes = Array[ExtResource("2_g7ukk")]([ExtResource("3_x56pv"), ExtResource("4_b6nfl"), ExtResource("3_ingjt"), ExtResource("6_kixj3"), ExtResource("7_7l224"), ExtResource("4_x07xo"), ExtResource("9_ofnkh"), ExtResource("10_gginx")])

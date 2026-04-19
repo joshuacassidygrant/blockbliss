@@ -3,6 +3,7 @@ class_name Shape
 var resource: ShapeResource
 var offset: Vector2i
 var rotation: int # number 0-3 representing 0deg, 90deg, 180deg, 270deg around 0,0 point
+var usages: int = -1 # default to -1, which is infinite usage; positive usage means that it can be removed
 
 const RADS_BY_ROT: Array[float] = [0, 0.5 * PI, PI, 1.5 * PI]
 
@@ -13,6 +14,7 @@ var tiles: Array[Vector2i]:
 func _init(off: Vector2i, res: ShapeResource) -> void:
 	resource = res
 	offset = off
+	usages = res.usages
 
 func rotate() -> void:
 	rotation = (rotation + 1) % 4

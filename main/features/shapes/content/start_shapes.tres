@@ -12,5 +12,5 @@
 
 [resource]
 script = ExtResource("1_qy3k6")
-shapes = Array[ExtResource("2_1ojt1")]([ExtResource("3_yidoa"), ExtResource("4_r70dr"), ExtResource("5_oqvnl"), ExtResource("6_1xfx1"), ExtResource("7_fajub"), ExtResource("8_xnjjc"), ExtResource("9_3phfn"), ExtResource("3_yidoa"), ExtResource("6_1xfx1"), ExtResource("8_xnjjc"), ExtResource("9_3phfn")])
+shapes = Array[ExtResource("2_1ojt1")]([ExtResource("3_yidoa"), ExtResource("4_r70dr"), ExtResource("5_oqvnl"), ExtResource("6_1xfx1"), ExtResource("7_fajub"), ExtResource("8_xnjjc"), ExtResource("9_3phfn")])
 metadata/_custom_type_script = "uid://lj020y82osui"
