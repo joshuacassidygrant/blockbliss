@@ -13,6 +13,7 @@ signal on_game_loss
 
 # START STATE
 @export var start_shapes: StartShapes
+@export var mission_config: MissionConfig
 
 
 var _game_controller: GameController
@@ -59,7 +60,7 @@ func bind_services(sfx: SFXPlayer, music: MusicPlayer, gsh: GameStateHolder) -> 
 	_grid_controller.bind_services(gsh, _shape_lib, _sfx)
 	_score_controller.bind_services(gsh)
 	_shapes_controller.bind_services(_game_state_holder, _shape_lib, _mission_controller)
-	_mission_controller.bind_services(_shape_lib)
+	_mission_controller.bind_services(_shape_lib, _game_state_holder)
 	_camera.initialize()
 	
 	_grid_controller.on_row_clear.connect(_camera.request_shake_screen.emit)
@@ -68,15 +69,15 @@ func bind_services(sfx: SFXPlayer, music: MusicPlayer, gsh: GameStateHolder) -> 
 	
 	renderer.bind_services(_grid_controller, _game_state_holder)
 	preview_renderer.bind_services(_grid_controller, _game_state_holder)
-	overlay.initialize(_score_controller, _shapes_controller, _game_controller)
+	overlay.initialize(_score_controller, _shapes_controller, _game_controller, _mission_controller)
 	
 func setup() -> void:
 	_game_controller.on_challenge_timer_hit.connect(_shapes_controller.generate_challenge_shape)
-		
+	_mission_controller.setup()
 
 func handle_start_new_game() -> void:
 	_game_state_holder.game_state = GameState.new()
-	_game_state_holder.game_state.mission = _mission_controller.generate_mission()
+	_game_state_holder.game_state.mission = _mission_controller.generate_mission(mission_config)
 	initialize_game_state()
 	_game_controller.start()
 

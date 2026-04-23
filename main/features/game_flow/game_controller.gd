@@ -3,7 +3,7 @@ class_name GameController extends Node
 signal on_game_loss
 signal on_active_time_updated
 signal on_challenge_timer_hit
-
+signal on_countdown_updated
 
 var _score_controller: ScoreController
 var _grid_controller: GridController
@@ -65,11 +65,7 @@ func _process(delta: float) -> void:
 				state.last_drop_time = state.active_time
 				if state.current_active_shape:
 					if _grid_controller.is_current_shape_touching_ground():
-						_sfx.request_sound(SFXPlayer.Key.IMPACT)
-						_grid_controller.convert_active_tiles_to_grid()
-						_grid_controller.check_and_clear_rows()
-						update_game_state()
-						_shapes_controller.next_active_tile_shape()
+						handle_shape_touching_ground()
 					else:
 						state.current_active_shape.offset += Vector2i(0, 1)
 						
@@ -98,3 +94,17 @@ func _process(delta: float) -> void:
 		elif state.status == GameState.GAME_STATUS.LOST:
 			on_game_loss.emit()
 		
+
+func handle_shape_touching_ground() -> void:
+	_sfx.request_sound(SFXPlayer.Key.IMPACT)
+	_grid_controller.convert_active_tiles_to_grid()
+	_grid_controller.check_and_clear_rows()
+	
+	if state.drops_until_end_mission > 0:
+		state.drops_until_end_mission -= 1
+		on_countdown_updated.emit(state.drops_until_end_mission)
+	elif state.drops_until_end_mission == 0:
+		print("end mis")
+	
+	update_game_state()
+	_shapes_controller.next_active_tile_shape()

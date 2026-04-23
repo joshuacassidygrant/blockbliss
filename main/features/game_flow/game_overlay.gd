@@ -6,11 +6,12 @@ class_name GameOverlay extends Node
 
 func initialize(score_controller: ScoreController,
 		shapes_controller: ShapesController,
-		game_controller: GameController) -> void:
+		game_controller: GameController,
+		mission_controller: MissionController) -> void:
 			
 	score_box.initialize(score_controller)
 	
 	shapes_controller.on_new_next_shape.connect(next_piece_renderer.on_new_next_shape.emit)
 	next_piece_renderer.initialize()
 	
-	ui_timer.initialize(game_controller)
+	ui_timer.initialize(game_controller, mission_controller)

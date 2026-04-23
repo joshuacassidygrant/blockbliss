@@ -54,36 +54,41 @@ text = "SCORE:"
 layout_mode = 2
 text = "00000000"
 
-[node name="timer" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("bar", "time_label")]
+[node name="timer" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("bar", "time_label", "countdown_label")]
 layout_mode = 2
 script = ExtResource("4_lqw6l")
-bar = NodePath("MarginContainer/VBoxContainer/ProgressBar")
-time_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
+bar = NodePath("MarginContainer/timer/ProgressBar")
+time_label = NodePath("MarginContainer/timer/HBoxContainer/Label2")
+countdown_label = NodePath("MarginContainer/timer/Countdown")
 
 [node name="MarginContainer" type="MarginContainer" parent="right_bar/timer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="right_bar/timer/MarginContainer"]
+[node name="timer" type="VBoxContainer" parent="right_bar/timer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="right_bar/timer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="right_bar/timer/MarginContainer/timer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="right_bar/timer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="right_bar/timer/MarginContainer/timer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfd0e")
 text = "TIME:"
 
-[node name="Label2" type="Label" parent="right_bar/timer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="right_bar/timer/MarginContainer/timer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfd0e")
 text = "12:00"
 
-[node name="ProgressBar" type="ProgressBar" parent="right_bar/timer/MarginContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="right_bar/timer/MarginContainer/timer"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 max_value = 1.0
 show_percentage = false
+
+[node name="Countdown" type="Label" parent="right_bar/timer/MarginContainer/timer"]
+layout_mode = 2
+text = "10 PIECES LEFT"
 
 [node name="next_piece" type="PanelContainer" parent="right_bar" node_paths=PackedStringArray("piece_frames", "deck_count_label", "discard_count_label")]
 layout_mode = 2

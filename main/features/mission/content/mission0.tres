@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MissionConfig" load_steps=4 format=3 uid="uid://ddi73pkmu4fqc"]
+
+[ext_resource type="Script" uid="uid://ciat0m1hxwvsa" path="res://features/shapes/shape_resource.gd" id="1_jf0tv"]
+[ext_resource type="Script" uid="uid://cboynwl0eui4" path="res://features/mission/mission_config.gd" id="2_geh3j"]
+[ext_resource type="Resource" uid="uid://dr0kyl83vsjni" path="res://features/shapes/content/shapes/grobblin.tres" id="2_y1d6w"]
+
+[resource]
+script = ExtResource("2_geh3j")
+challenge_shapes = Array[ExtResource("1_jf0tv")]([ExtResource("2_y1d6w")])
+metadata/_custom_type_script = "uid://cboynwl0eui4"

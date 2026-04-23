@@ -18,6 +18,7 @@ var score: int
 
 var shape_stack: Array[Shape]
 var shape_discard: Array[Shape]
+var drops_until_end_mission: int = -1
 
 
 

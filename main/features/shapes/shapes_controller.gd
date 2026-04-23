@@ -45,7 +45,13 @@ func maybe_shuffle_back_discard() -> void:
 		on_shape_deck_reshuffle.emit()
 		
 func generate_challenge_shape() -> void:
-	# BUG: It doesn't seem to ever be getting the last shape?
 	var shape_res: ShapeResource = _mission_controller.pop_next_challenge_shape(_game_state_holder.game_state.mission)
+	if shape_res == null:
+		# this means we've used all the challenge shapes in the current mission
+		if state.drops_until_end_mission == -1:
+			_mission_controller.on_last_challenge_shape_added.emit()
+		return
 	var shape: Shape = Shape.new( Vector2i(5, 0), shape_res)
-	state.shape_discard.append(shape)
+	# insert challenge shape in the last visible slot
+	state.shape_stack.insert(2, shape)
+	# TODO: emit to update visually	
