@@ -4,6 +4,7 @@ signal on_game_loss
 signal on_active_time_updated
 signal on_challenge_timer_hit
 signal on_countdown_updated
+signal on_mission_ended
 
 var _score_controller: ScoreController
 var _grid_controller: GridController
@@ -104,7 +105,11 @@ func handle_shape_touching_ground() -> void:
 		state.drops_until_end_mission -= 1
 		on_countdown_updated.emit(state.drops_until_end_mission)
 	elif state.drops_until_end_mission == 0:
-		print("end mis")
+		end_mission()
 	
 	update_game_state()
 	_shapes_controller.next_active_tile_shape()
+
+
+func end_mission() -> void:
+	on_mission_ended.emit()
